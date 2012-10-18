@@ -8,18 +8,18 @@ MoRP is designed to be simple. It has only three non-abstract elements (in MoRP 
 Central concept in MoRP is model.
 
 Description of MoRP can be found in this paper:
-`MoRP META-METAMODEL: TOWARDS A FOUNDATION OF SLEWORKS WORKBENCH`_
+`MoRP META-METAMODEL - TOWARDS A FOUNDATION OF SLEWORKS WORKBENCH`_
 
-.. _MoRP META-METAMODEL: TOWARDS A FOUNDATION OF SLEWORKS WORKBENCH : http://www.e-drustvo.org/icist/2012/html/pdf/530.pdf
+.. _MoRP META-METAMODEL - TOWARDS A FOUNDATION OF SLEWORKS WORKBENCH: http://www.e-drustvo.org/icist/2012/html/pdf/530.pdf
 
 
 AUTHOR
-======
+------
 
  Igor R. Dejanović - igor DOT dejanovic AT gmail DOT com
  
 COPYING
-======= 
+-------
 
 This software is distributed under the terms of MIT license.
 Please see LICENSE file.
