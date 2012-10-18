@@ -1,0 +1,8 @@
+*/bin/*
+*.tmp
+*~
+*.lock
+*.class
+*/.settings/*
+.project
+.classpath
