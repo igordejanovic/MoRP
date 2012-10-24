@@ -26,8 +26,7 @@ public class Repository implements IRepository {
 		this.backend = backend;
 	}
 
-	@Override
-	public IRepositoryObject wrap(IRepositoryObject obj) {
+	protected IRepositoryObject wrap(IRepositoryObject obj) {
 		RepositoryObjectType type = obj.getRepositoryObjectType();
 		IRepositoryObject target = obj;
 		
@@ -52,6 +51,11 @@ public class Repository implements IRepository {
 		return target;
 	}
 
+	@Override
+	public IRepositoryObject wrapBackendObject(IBackendObject obj) {
+		return wrap(new RepositoryObject(obj, this));
+	}
+		
 	@Override
 	public IBackend getBackend() {
 		return this.backend;
@@ -199,10 +203,7 @@ public class Repository implements IRepository {
 		if(uuid==null)
 			uuid = UUID.randomUUID().toString();
 
-		IRepositoryObject obj = new RepositoryObject(getBackend().createBackendObject(type.name(), uuid), this);
-		setProperty(obj, IRepositoryElement.REPOSITORY_OBJECT_PROPERTY_TYPE_NAME, type.name());
-		setProperty(obj, IRepositoryElement.REPOSITORY_ELEMENT_PROPERTY_UUID_NAME, uuid);
-		return wrap(obj);
+		return wrapBackendObject(getBackend().createBackendObject(type.name(), uuid));
 	}
 
 	@Override
@@ -212,27 +213,25 @@ public class Repository implements IRepository {
 		if(uuid==null)
 			uuid = UUID.randomUUID().toString();
 		
-		Object b = getBackend().createBackendObject(type.name(), uuid);
+		IBackendObject b = getBackend().createBackendObject(type.name(), uuid);
 		IRepositoryLink link = new RepositoryLink(b, this); 
 		getBackend().createBackendFromLink(b, from.getBackendObject());
 		getBackend().createBackendToLink(b, to.getBackendObject());
-		setProperty(link, IRepositoryElement.REPOSITORY_OBJECT_PROPERTY_TYPE_NAME, type.name());
-		setProperty(link, IRepositoryElement.REPOSITORY_ELEMENT_PROPERTY_UUID_NAME, uuid);
 		return link;
 	}
 
 	@Override
 	public List<? extends IRepositoryObject> getObjects(RepositoryObjectType type) {
 		List<IRepositoryObject> objs = new ArrayList<IRepositoryObject>();
-		for(Object backendObj: getBackend().getBackendObjects(type.name())){
-			objs.add(wrap(new RepositoryObject(backendObj, this)));
+		for(IBackendObject backendObj: getBackend().getBackendObjects(type.name())){
+			objs.add(wrapBackendObject(backendObj));
 		}
 		return objs;
 	}
 
 	@Override
 	public IRepositoryObject getObject(String uuid) throws DoesNotExistsException {
-		return wrap(new RepositoryObject(getBackend().getBackendObject(uuid), this));
+		return wrapBackendObject(getBackend().getBackendObject(uuid));
 	}
 
 	@Override
@@ -241,8 +240,8 @@ public class Repository implements IRepository {
 	}
 
 	@Override
-	public void deleteElement(IRepositoryElement element) {
-		this.getBackend().deleteBackendObject(element.getBackendObject());
+	public void deleteElement(IRepositoryElement element) throws DoesNotExistsException {
+		this.getBackend().deleteBackendObject(element.getUUID());
 	}
 
 	@Override
@@ -266,11 +265,11 @@ public class Repository implements IRepository {
 	
 	@Override
 	public List<IRepositoryLink> getLinksIn(IRepositoryObject obj) {
-		List<Object> objs = new ArrayList<Object>();
-		objs.addAll(getBackend().getBackendLinkObjectsForToLink(obj.getBackendObject()));
+		List<? extends IBackendObject> objs = getBackend()
+				.getBackendLinkObjectsForToLink(obj.getBackendObject());
 		
 		List<IRepositoryLink> links = new ArrayList<IRepositoryLink>();
-		for(Object o: objs){
+		for(IBackendObject o: objs){
 			links.add(new RepositoryLink(o, this));
 		}
 		return links;
@@ -289,11 +288,11 @@ public class Repository implements IRepository {
 
 	@Override
 	public List<IRepositoryLink> getLinksOut(IRepositoryObject obj) {
-		List<Object> objs = new ArrayList<Object>();
-		objs.addAll(getBackend().getBackendLinkObjectsForFromLink(obj.getBackendObject()));
+		List<? extends IBackendObject> objs = getBackend()
+				.getBackendLinkObjectsForFromLink(obj.getBackendObject());
 		
 		List<IRepositoryLink> links = new ArrayList<IRepositoryLink>();
-		for(Object o: objs){
+		for(IBackendObject o: objs){
 			links.add(new RepositoryLink(o, this));
 		}
 		return links;

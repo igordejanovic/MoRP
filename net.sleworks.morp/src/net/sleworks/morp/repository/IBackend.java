@@ -12,23 +12,23 @@ import net.sleworks.morp.exceptions.DoesNotExistsException;
 public interface IBackend {
 
 	// Backend properties
-	Object getProperty(Object obj, String name);
-	void setProperty(Object obj, String name, Object value);
+	Object getProperty(IBackendObject obj, String name);
+	void setProperty(IBackendObject obj, String name, Object value);
 	
 	// Backend objects
-	Object createBackendObject(String type, String uuid);
-	List<Object> getBackendObjects(String type);
-	Object getBackendObject(String uuid) throws DoesNotExistsException;
-	void deleteBackendObject(Object obj);
+	IBackendObject createBackendObject(String type, String uuid);
+	List<? extends IBackendObject> getBackendObjects(String type);
+	IBackendObject getBackendObject(String uuid) throws DoesNotExistsException;
+	void deleteBackendObject(String uuid) throws DoesNotExistsException;
 	
 	// BackendLinks
-	void createBackendFromLink(Object linkObj, Object obj);	
-	void createBackendToLink(Object linkObj, Object obj);	
-	List<Object> getBackendLinkObjectsForFromLink(Object obj);
-	List<Object> getBackendLinkObjectsForToLink(Object obj);
-	Object getBackendObjectForFromLink(Object linkObj);
-	Object getBackendObjectForToLink(Object linkObj);
-	void deleteBackendLink(Object from, Object to);	
+	void createBackendFromLink(IBackendObject linkObj, IBackendObject obj);	
+	void createBackendToLink(IBackendObject linkObj, IBackendObject obj);	
+	List<? extends IBackendObject> getBackendLinkObjectsForFromLink(IBackendObject obj);
+	List<? extends IBackendObject> getBackendLinkObjectsForToLink(IBackendObject obj);
+	IBackendObject getBackendObjectForFromLink(IBackendObject linkObj);
+	IBackendObject getBackendObjectForToLink(IBackendObject linkObj);
+	void deleteBackendLink(IBackendObject from, IBackendObject to);	
 	
 				
 	// Transaction support

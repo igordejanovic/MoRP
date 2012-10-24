@@ -9,9 +9,9 @@ public interface IRepositoryElement {
 	public static final String REPOSITORY_OBJECT_PROPERTY_TYPE_NAME = "__type";
 	public static final String REPOSITORY_ELEMENT_PROPERTY_UUID_NAME = "__uuid";
 
-	Object getBackendObject();
+	IBackendObject getBackendObject();
 	
-	void setBackendObject(Object obj);
+	void setBackendObject(IBackendObject obj);
 
 	IRepository getRepository();
 	

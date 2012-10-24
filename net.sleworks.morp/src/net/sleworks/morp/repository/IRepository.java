@@ -23,12 +23,12 @@ public interface IRepository {
 	IBackend getBackend();
 	
 	/**
-	 * Used for creating appropriate MoRP class instance based on the underlying repository object type.
+	 * Used for creating appropriate MoRP class instance based on the underlying backend object.
 	 * @param obj
 	 * @return
 	 */
-	IRepositoryObject wrap(IRepositoryObject obj);
-
+	IRepositoryObject wrapBackendObject(IBackendObject obj);
+	
 	
 	// ###########################################################################################
 	// #####################         Support for MoRP
@@ -169,8 +169,9 @@ public interface IRepository {
 	/**
 	 * @param element delete given repository element. If the given element is object that all connected links
 	 * will be deleted also.
+	 * @throws DoesNotExistsException 
 	 */
-	void deleteElement(IRepositoryElement element);
+	void deleteElement(IRepositoryElement element) throws DoesNotExistsException;
 		
 
 	// ###########################################################################################

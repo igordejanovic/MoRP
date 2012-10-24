@@ -7,25 +7,26 @@ package net.sleworks.morp.repository;
 public class RepositoryLink extends RepositoryElement implements
 		IRepositoryLink {
 
-	public RepositoryLink(Object backendObject, IRepository sandbox) {
-		super(backendObject, sandbox);
+	public RepositoryLink(IBackendObject backendObject, IRepository repository) {
+		super(backendObject, repository);
 	}
 
 	@Override
 	public RepositoryLinkType getType() {
-		return RepositoryLinkType.valueOf((String)getRepository().getProperty(this, REPOSITORY_OBJECT_PROPERTY_TYPE_NAME));
+		return RepositoryLinkType.valueOf((String)getRepository()
+					.getProperty(this, REPOSITORY_OBJECT_PROPERTY_TYPE_NAME));
 	}
 
 	@Override
 	public IRepositoryObject getFrom() {
-		return getRepository().wrap(new RepositoryObject(getRepository().getBackend()
-				.getBackendObjectForFromLink(this.getBackendObject()), getRepository()));
+		return getRepository().wrapBackendObject(getRepository().getBackend()
+				.getBackendObjectForFromLink(this.getBackendObject()));
 	}
 
 	@Override
 	public IRepositoryObject getTo() {
-		return new RepositoryObject(getRepository().getBackend()
-				.getBackendObjectForToLink(this.getBackendObject()), getRepository());
+		return getRepository().wrapBackendObject(getRepository().getBackend()
+				.getBackendObjectForToLink(this.getBackendObject()));
 	}
 
 }
