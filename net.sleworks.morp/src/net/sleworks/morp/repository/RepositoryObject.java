@@ -7,8 +7,8 @@ package net.sleworks.morp.repository;
 
 public class RepositoryObject extends RepositoryElement implements IRepositoryObject {
 	
-	public RepositoryObject(IBackendObject backendObject, IRepository repository) {
-		super(backendObject, repository);
+	public RepositoryObject(IRepository repository) {
+		super(repository);
 	}
 
 	@Override

@@ -17,13 +17,10 @@ import net.sleworks.morp.impl.Property;
 import net.sleworks.morp.impl.Reference;
 import net.sleworks.morp.impl.ReferenceI;
 
-public class Repository implements IRepository {
+public abstract class AbstractRepository implements IRepository {
 
-	private final IBackend backend;
-	
-	public Repository(IBackend backend) {
+	public AbstractRepository() {
 		super();
-		this.backend = backend;
 	}
 
 	protected IRepositoryObject wrap(IRepositoryObject obj) {
@@ -51,17 +48,7 @@ public class Repository implements IRepository {
 		return target;
 	}
 
-	@Override
-	public IRepositoryObject wrapBackendObject(IBackendObject obj) {
-		return wrap(new RepositoryObject(obj, this));
-	}
 		
-	@Override
-	public IBackend getBackend() {
-		return this.backend;
-	}
-
-
 	// #########################################################################################
 	// ###################  Support for the MoRP model
 	// #########################################################################################
@@ -186,63 +173,6 @@ public class Repository implements IRepository {
 	// ###################  Support for the repository graph model
 	// #########################################################################################
 	
-	@Override
-	public Object getProperty(IRepositoryElement element, String name) {
-		return this.getBackend().getProperty(element.getBackendObject(), name);
-	}
-
-	@Override
-	public void setProperty(IRepositoryElement element, String name,
-			Object value) {
-		this.getBackend().setProperty(element.getBackendObject(), name, value);
-	}
-
-	@Override
-	public IRepositoryObject createObject(RepositoryObjectType type, String uuid) {
-		
-		if(uuid==null)
-			uuid = UUID.randomUUID().toString();
-
-		return wrapBackendObject(getBackend().createBackendObject(type.name(), uuid));
-	}
-
-	@Override
-	public IRepositoryLink createLink(RepositoryLinkType type,
-			IRepositoryObject from, IRepositoryObject to, String uuid) {
-
-		if(uuid==null)
-			uuid = UUID.randomUUID().toString();
-		
-		IBackendObject b = getBackend().createBackendObject(type.name(), uuid);
-		IRepositoryLink link = new RepositoryLink(b, this); 
-		getBackend().createBackendFromLink(b, from.getBackendObject());
-		getBackend().createBackendToLink(b, to.getBackendObject());
-		return link;
-	}
-
-	@Override
-	public List<? extends IRepositoryObject> getObjects(RepositoryObjectType type) {
-		List<IRepositoryObject> objs = new ArrayList<IRepositoryObject>();
-		for(IBackendObject backendObj: getBackend().getBackendObjects(type.name())){
-			objs.add(wrapBackendObject(backendObj));
-		}
-		return objs;
-	}
-
-	@Override
-	public IRepositoryObject getObject(String uuid) throws DoesNotExistsException {
-		return wrapBackendObject(getBackend().getBackendObject(uuid));
-	}
-
-	@Override
-	public IRepositoryLink getLink(String uuid) throws DoesNotExistsException {
-		return new RepositoryLink(getBackend().getBackendObject(uuid), this);
-	}
-
-	@Override
-	public void deleteElement(IRepositoryElement element) throws DoesNotExistsException {
-		this.getBackend().deleteBackendObject(element.getUUID());
-	}
 
 	@Override
 	public List<IRepositoryLink> getLinks(IRepositoryObject obj) {
@@ -265,119 +195,39 @@ public class Repository implements IRepository {
 	
 	@Override
 	public List<IRepositoryLink> getLinksIn(IRepositoryObject obj) {
-		List<? extends IBackendObject> objs = getBackend()
-				.getBackendLinkObjectsForToLink(obj.getBackendObject());
-		
-		List<IRepositoryLink> links = new ArrayList<IRepositoryLink>();
-		for(IBackendObject o: objs){
-			links.add(new RepositoryLink(o, this));
-		}
-		return links;
-	}
-
-	@Override
-	public List<IRepositoryLink> getLinksIn(IRepositoryObject obj,
-			RepositoryLinkType type) {
-		List<IRepositoryLink> links = new ArrayList<IRepositoryLink>();
-		for(IRepositoryLink l: getLinksIn(obj)){
-			if(l.getType() == type)
-				links.add(l);
-		}
-		return links;
+		return getLinksIn(obj, RepositoryLinkType.ALL);
 	}
 
 	@Override
 	public List<IRepositoryLink> getLinksOut(IRepositoryObject obj) {
-		List<? extends IBackendObject> objs = getBackend()
-				.getBackendLinkObjectsForFromLink(obj.getBackendObject());
-		
-		List<IRepositoryLink> links = new ArrayList<IRepositoryLink>();
-		for(IBackendObject o: objs){
-			links.add(new RepositoryLink(o, this));
-		}
-		return links;
-	}
-
-	@Override
-	public List<IRepositoryLink> getLinksOut(IRepositoryObject obj,
-			RepositoryLinkType type) {
-		List<IRepositoryLink> links = new ArrayList<IRepositoryLink>();
-		for(IRepositoryLink l: getLinksOut(obj)){
-			if(l.getType() == type)
-				links.add(l);
-		}
-		return links;
+		return getLinksOut(obj, RepositoryLinkType.ALL);
 	}
 
 	@Override
 	public List<? extends IRepositoryObject> getOthersIn(IRepositoryObject obj) {
-		List<IRepositoryObject> objs = new ArrayList<IRepositoryObject>();
-		for(IRepositoryLink l: getLinksIn(obj)){
-			objs.add(l.getFrom());
-		}
-		return objs;
-	}
-
-	@Override
-	public List<? extends IRepositoryObject> getOthersIn(IRepositoryObject obj,
-			RepositoryLinkType type) {
-		List<IRepositoryObject> objs = new ArrayList<IRepositoryObject>();
-		for(IRepositoryLink l: getLinksIn(obj, type)){
-			objs.add(l.getFrom());
-		}
-		return objs;
+		return getOthersIn(obj, RepositoryLinkType.ALL);
 	}
 
 	@Override
 	public List<? extends IRepositoryObject> getOthersOut(
 			IRepositoryObject obj) {
-		List<IRepositoryObject> objs = new ArrayList<IRepositoryObject>();
-		for(IRepositoryLink l: getLinksOut(obj)){
-			objs.add(l.getTo());
-		}
-		return objs;
+		return getOthersOut(obj, RepositoryLinkType.ALL);
 	}
-
-	@Override
-	public List<? extends IRepositoryObject> getOthersOut(
-			IRepositoryObject obj, RepositoryLinkType type) {
-		List<IRepositoryObject> objs = new ArrayList<IRepositoryObject>();
-		for(IRepositoryLink l: getLinksOut(obj, type)){
-			objs.add(l.getTo());
-		}
-		return objs;
-	}
-
 
 	@Override
 	public IModel getModelByUUID(String uuid) throws DoesNotExistsException {
-		// TODO Provera tipa.... wrapper metoda 
-		return new Model(new RepositoryObject(getBackend().getBackendObject(uuid), this));
+		IRepositoryObject model = wrap(getObjectByUUID(uuid));
+		if(!(model instanceof IModel))
+			throw new NotValidRepositoryObject();
+		return (IModel)model;
 	}
 
 	@Override
 	public IReference getReferenceByUUID(String uuid) throws DoesNotExistsException {
-		// TODO Provera tipa.... wrapper metoda 
-		return new Reference(new RepositoryObject(getBackend().getBackendObject(uuid), this));
+		IRepositoryObject ref = wrap(getObjectByUUID(uuid));
+		if(!(ref instanceof IReference))
+			throw new NotValidRepositoryObject();
+		return (IReference)ref;
 	}
 
-
-	@Override
-	public void txBegin() {
-		getBackend().txBegin();
-	}
-
-	@Override
-	public void txSuccess() {
-		getBackend().txSuccess();
-	}
-
-	@Override
-	public void txEnd() {
-		getBackend().txEnd();
-	}
-
-
-
-	
 }

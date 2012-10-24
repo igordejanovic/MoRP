@@ -7,8 +7,8 @@ package net.sleworks.morp.repository;
 public class RepositoryLink extends RepositoryElement implements
 		IRepositoryLink {
 
-	public RepositoryLink(IBackendObject backendObject, IRepository repository) {
-		super(backendObject, repository);
+	public RepositoryLink(IRepository repository) {
+		super(repository);
 	}
 
 	@Override
@@ -19,14 +19,12 @@ public class RepositoryLink extends RepositoryElement implements
 
 	@Override
 	public IRepositoryObject getFrom() {
-		return getRepository().wrapBackendObject(getRepository().getBackend()
-				.getBackendObjectForFromLink(this.getBackendObject()));
+		return this.getRepository().getFromSideForLink(this);
 	}
 
 	@Override
 	public IRepositoryObject getTo() {
-		return getRepository().wrapBackendObject(getRepository().getBackend()
-				.getBackendObjectForToLink(this.getBackendObject()));
+		return this.getRepository().getToSideForLink(this);
 	}
 
 }

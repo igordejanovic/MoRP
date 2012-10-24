@@ -15,20 +15,6 @@ import net.sleworks.morp.exceptions.DoesNotExistsException;
 
 
 public interface IRepository {
-
-	/**
-	 * Returns configured backend. Should be used from the repository implementation classes.
-	 * @return configured backend for this repository.
-	 */
-	IBackend getBackend();
-	
-	/**
-	 * Used for creating appropriate MoRP class instance based on the underlying backend object.
-	 * @param obj
-	 * @return
-	 */
-	IRepositoryObject wrapBackendObject(IBackendObject obj);
-	
 	
 	// ###########################################################################################
 	// #####################         Support for MoRP
@@ -60,6 +46,8 @@ public interface IRepository {
 	// ###########################################################################################
 	// ############# Support for repository model based on attributed, typed, directed multigraph.
 	// ###########################################################################################
+
+	IRepositoryObject getObjectByUUID(String uuid);
 
 	// Repository object property support 
 	Object getProperty(IRepositoryElement element, String name);
@@ -129,6 +117,19 @@ public interface IRepository {
 	 * @throws DoesNotExistsException
 	 */
 	IRepositoryLink getLink(String uuid) throws DoesNotExistsException;
+
+	
+	/**
+	 * @param link link object
+	 * @return Repository object which is at the "from" side of the link.
+	 */
+	IRepositoryObject getFromSideForLink(IRepositoryLink link);
+	
+	/**
+	 * @param link link object
+	 * @return Repository object which is at the "to" side of the link.
+	 */
+	IRepositoryObject getToSideForLink(IRepositoryLink link);
 
 	/**
 	 * @param obj

@@ -7,21 +7,9 @@ package net.sleworks.morp.repository;
 public class RepositoryElement implements IRepositoryElement {
 
 	private IRepository repository;
-	private IBackendObject backendObject;
 	
-	public RepositoryElement(IBackendObject backendObject, IRepository sandbox){
-		this.backendObject = backendObject;
-		this.repository = sandbox;
-	}
-	
-	@Override
-	public IBackendObject getBackendObject() {
-		return this.backendObject;
-	}
-
-	@Override
-	public void setBackendObject(IBackendObject obj) {
-		this.backendObject = obj;
+	public RepositoryElement(IRepository repository){
+		this.repository = repository;
 	}
 
 	@Override
