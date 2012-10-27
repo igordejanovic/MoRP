@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import net.sleworks.morp.exceptions.DoesNotExistsException;
-import net.sleworks.morp.repository.impl.HashMapRepository;
+import net.sleworks.morp.repository.backends.HashMapRepository;
 
 import org.junit.Before;
 import org.junit.Test;

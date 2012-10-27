@@ -1,4 +1,4 @@
-package net.sleworks.morp.repository.impl;
+package net.sleworks.morp.repository.backends;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -7,15 +7,15 @@ import java.util.Map;
 import java.util.UUID;
 
 import net.sleworks.morp.exceptions.DoesNotExistsException;
-import net.sleworks.morp.repository.AbstractRepository;
 import net.sleworks.morp.repository.IBackendObject;
 import net.sleworks.morp.repository.IRepositoryElement;
 import net.sleworks.morp.repository.IRepositoryLink;
 import net.sleworks.morp.repository.IRepositoryObject;
-import net.sleworks.morp.repository.RepositoryLink;
 import net.sleworks.morp.repository.RepositoryLinkType;
-import net.sleworks.morp.repository.RepositoryObject;
 import net.sleworks.morp.repository.RepositoryObjectType;
+import net.sleworks.morp.repository.impl.AbstractRepository;
+import net.sleworks.morp.repository.impl.RepositoryLink;
+import net.sleworks.morp.repository.impl.RepositoryObject;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;

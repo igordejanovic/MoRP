@@ -14,7 +14,8 @@ import net.sleworks.morp.IModel;
 import net.sleworks.morp.IReference;
 import net.sleworks.morp.MoRPConstants;
 import net.sleworks.morp.exceptions.DoesNotExistsException;
-import net.sleworks.morp.repository.impl.HashMapRepository;
+import net.sleworks.morp.impl.MoRPLanguage;
+import net.sleworks.morp.repository.backends.HashMapRepository;
 
 import org.junit.Before;
 import org.junit.Test;

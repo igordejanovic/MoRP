@@ -2,7 +2,13 @@
  * Copyright (c) Igor R. Dejanović <igor DOT dejanovic AT gmail DOT com>
  * See LICENSE file which accompanies this distribution.
  *******************************************************************************************/
-package net.sleworks.morp.repository;
+package net.sleworks.morp.repository.impl;
+
+import net.sleworks.morp.repository.IBackendObject;
+import net.sleworks.morp.repository.IRepository;
+import net.sleworks.morp.repository.IRepositoryLink;
+import net.sleworks.morp.repository.IRepositoryObject;
+import net.sleworks.morp.repository.RepositoryLinkType;
 
 public class RepositoryLink extends RepositoryElement implements
 		IRepositoryLink {

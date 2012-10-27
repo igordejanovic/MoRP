@@ -2,7 +2,7 @@
  * Copyright (c) Igor R. Dejanović <igor DOT dejanovic AT gmail DOT com>
  * See LICENSE file which accompanies this distribution.
  *******************************************************************************************/
-package net.sleworks.morp.repository;
+package net.sleworks.morp.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,12 @@ import net.sleworks.morp.impl.ModelI;
 import net.sleworks.morp.impl.Property;
 import net.sleworks.morp.impl.Reference;
 import net.sleworks.morp.impl.ReferenceI;
+import net.sleworks.morp.repository.IRepository;
+import net.sleworks.morp.repository.IRepositoryLink;
+import net.sleworks.morp.repository.IRepositoryObject;
+import net.sleworks.morp.repository.RepositoryLinkType;
+import net.sleworks.morp.repository.RepositoryObjectType;
+import net.sleworks.morp.repository.exceptions.NotValidRepositoryObject;
 
 public abstract class AbstractRepository implements IRepository {
 

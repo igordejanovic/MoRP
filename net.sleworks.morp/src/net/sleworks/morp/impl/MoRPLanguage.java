@@ -2,12 +2,13 @@
  * Copyright (c) Igor R. Dejanović <igor DOT dejanovic AT gmail DOT com>
  * See LICENSE file which accompanies this distribution.
  *******************************************************************************************/
-package net.sleworks.morp.repository;
+package net.sleworks.morp.impl;
 
 import net.sleworks.morp.IModel;
 import net.sleworks.morp.IProperty;
 import net.sleworks.morp.IReference;
 import net.sleworks.morp.MoRPConstants;
+import net.sleworks.morp.repository.IRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

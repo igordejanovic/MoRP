@@ -7,7 +7,7 @@ package net.sleworks.morp.impl;
 import net.sleworks.morp.IMoRPObject;
 import net.sleworks.morp.repository.IRepositoryObject;
 import net.sleworks.morp.repository.RepositoryLinkType;
-import net.sleworks.morp.repository.RepositoryObject;
+import net.sleworks.morp.repository.impl.RepositoryObject;
 
 
 public class MoRPObject extends RepositoryObject implements IMoRPObject {
