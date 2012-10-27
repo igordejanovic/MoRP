@@ -7,14 +7,14 @@ package net.sleworks.morp.repository;
 public class RepositoryLink extends RepositoryElement implements
 		IRepositoryLink {
 
-	public RepositoryLink(IRepository repository) {
-		super(repository);
+	public RepositoryLink(IRepository repository, IBackendObject backendObject) {
+		super(repository, backendObject);
 	}
 
 	@Override
 	public RepositoryLinkType getType() {
 		return RepositoryLinkType.valueOf((String)getRepository()
-					.getProperty(this, REPOSITORY_OBJECT_PROPERTY_TYPE_NAME));
+					.getProperty(this, REPOSITORY_ELEMENT_PROPERTY_TYPE_NAME));
 	}
 
 	@Override

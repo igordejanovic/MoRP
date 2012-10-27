@@ -7,13 +7,13 @@ package net.sleworks.morp.repository;
 
 public class RepositoryObject extends RepositoryElement implements IRepositoryObject {
 	
-	public RepositoryObject(IRepository repository) {
-		super(repository);
+	public RepositoryObject(IRepository repository, IBackendObject backendObject) {
+		super(repository, backendObject);
 	}
 
 	@Override
 	public RepositoryObjectType getRepositoryObjectType() {
-		return RepositoryObjectType.valueOf((String)getRepository().getProperty(this, REPOSITORY_OBJECT_PROPERTY_TYPE_NAME));
+		return RepositoryObjectType.valueOf((String)getRepository().getProperty(this, REPOSITORY_ELEMENT_PROPERTY_TYPE_NAME));
 	}
 
 

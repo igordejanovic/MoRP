@@ -109,7 +109,8 @@ public class ModelI extends MoRPObject implements IModelI {
 	private IMoRPList<IReferenceI> getReferenceI(Predicate<MoRPObject> p) {
 		IMoRPList<IReferenceI> refInsts = new MoRPList<IReferenceI>();
 		@SuppressWarnings("unchecked")
-		List<IReferenceI> refInstAll = (List<IReferenceI>) this.getRepository().getOthersIn(this, RepositoryLinkType.MORP_REFERENCEI_FROM);
+		List<IReferenceI> refInstAll = (List<IReferenceI>) this.getRepository()
+				.getOthersIn(this, RepositoryLinkType.MORP_REFERENCEI_FROM);
 
 		for(IReferenceI r: refInstAll){
 			if(p.apply((MoRPObject) r))

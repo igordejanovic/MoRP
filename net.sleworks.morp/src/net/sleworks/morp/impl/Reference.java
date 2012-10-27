@@ -15,7 +15,6 @@ public class Reference extends ModelI implements IReference {
 
 	public Reference(IRepositoryObject obj) {
 		super(obj);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

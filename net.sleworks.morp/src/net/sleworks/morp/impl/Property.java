@@ -16,7 +16,6 @@ public class Property extends ModelI implements IProperty {
 
 	public Property(IRepositoryObject obj) {
 		super(obj);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

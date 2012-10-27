@@ -20,7 +20,6 @@ public class Model extends ModelI implements IModel {
 
 	public Model(IRepositoryObject obj) {
 		super(obj);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

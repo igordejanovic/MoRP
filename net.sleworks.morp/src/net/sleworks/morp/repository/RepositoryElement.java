@@ -7,9 +7,15 @@ package net.sleworks.morp.repository;
 public class RepositoryElement implements IRepositoryElement {
 
 	private IRepository repository;
+	private IBackendObject backendObject;
 	
-	public RepositoryElement(IRepository repository){
+	public RepositoryElement(IRepository repository, IBackendObject obj){
 		this.repository = repository;
+		this.backendObject = obj;
+	}
+
+	public IBackendObject getBackendObject() {
+		return backendObject;
 	}
 
 	@Override
@@ -29,8 +35,7 @@ public class RepositoryElement implements IRepositoryElement {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof IRepositoryObject &&
-				this.getUUID().equals(((IRepositoryObject)obj).getUUID());
+		return obj!=null && this.getBackendObject().equals(((IRepositoryElement)obj).getBackendObject());
 	}
 
 	@Override

@@ -9,9 +9,6 @@ public enum RepositoryLinkType {
 	ALL, // Special link type. Matches all other link types.
 	
 	MORP_META,
-	MORP_MODELI, 
 	MORP_REFERENCEI_FROM, 
-	MORP_REFERENCEI_TO, 
-	MORP_MODEL
-	
+	MORP_REFERENCEI_TO	
 }

@@ -4,12 +4,9 @@
  *******************************************************************************************/
 package net.sleworks.morp.repository;
 
-public enum RepositoryObjectType {
-	ALL,
-	MORP_MODEL, 
-	MORP_MODELI, 
-	MORP_REFERENCEI, 
-	MORP_PROPERTY, 
-	MORP_REFERENCE 
-	
+/**
+ * Marker interface for backend objects.
+ */
+public interface IBackendObject {
+
 }

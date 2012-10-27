@@ -33,7 +33,8 @@ public class ReferenceI extends MoRPObject implements IReferenceI {
 	
 	@Override
 	public IModelI getFrom() {
-		return getMoRPObject((IMoRPObject) this.getRepository().getOthersOut(this, RepositoryLinkType.MORP_REFERENCEI_FROM).get(0));
+		return getMoRPObject((IMoRPObject) this.getRepository()
+				.getOthersOut(this, RepositoryLinkType.MORP_REFERENCEI_FROM).get(0));
 	}
 	
 	public void setFrom(IModelI from){

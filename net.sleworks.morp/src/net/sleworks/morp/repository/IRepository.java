@@ -184,7 +184,7 @@ public interface IRepository {
 	public void txBegin();
 
 	/**
-	 * Marks transactiona as successful
+	 * Marks transaction as successful
 	 */
 	public void txSuccess();	
 	

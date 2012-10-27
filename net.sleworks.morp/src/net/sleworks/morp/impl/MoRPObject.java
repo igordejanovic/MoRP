@@ -13,7 +13,7 @@ import net.sleworks.morp.repository.RepositoryObject;
 public class MoRPObject extends RepositoryObject implements IMoRPObject {
 
 	public MoRPObject(IRepositoryObject obj) {
-		super(obj.getBackendObject(), obj.getRepository());
+		super(obj.getRepository(), obj.getBackendObject());
 	}
 
 	@Override
