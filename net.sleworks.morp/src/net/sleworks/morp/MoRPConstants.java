@@ -32,6 +32,7 @@ public interface MoRPConstants {
 	static final String UUID_PROPERTY_TYPE = "7e873531-591a-441e-a45e-efb87f7510d4";
 
 	static final String UUID_PRIMITIVE_TYPES = "5b7f0ca6-956c-4e03-acc1-b7f41da83c16";
+	static final String UUID_PRIMITIVE_TYPES_PRIMITIVE_TYPE = "df767a6a-23bd-4352-851f-a21e9a4a9907";
 	static final String UUID_PRIMITIVE_TYPES_STRING = "cad52269-47f7-4e74-b743-9e92484786ec";
 	static final String UUID_PRIMITIVE_TYPES_INTEGER = "f2930f28-9c1b-4c81-b816-22a8f37a975a";
 	static final String UUID_PRIMITIVE_TYPES_BOOLEAN = "e021c466-5c04-4550-8094-f095b4779b3b";

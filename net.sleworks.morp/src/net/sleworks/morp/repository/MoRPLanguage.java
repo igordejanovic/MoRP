@@ -78,7 +78,8 @@ public class MoRPLanguage {
 
 		// Primitive types
 		IModel primitiveTypes = repository.createModel(MoRPConstants.PRIMITIVE_TYPES, MoRPConstants.UUID_PRIMITIVE_TYPES);
-		IModel primitiveType = primitiveTypes.createInnerModel(MoRPConstants.PRIMITIVE_TYPES_PRIMITIVE_TYPE).setAbstract(true);
+		IModel primitiveType = primitiveTypes.createInnerModel(MoRPConstants.PRIMITIVE_TYPES_PRIMITIVE_TYPE,
+									MoRPConstants.UUID_PRIMITIVE_TYPES_PRIMITIVE_TYPE).setAbstract(true);
 		IModel string = primitiveTypes.createInnerModel(MoRPConstants.PRIMITIVE_TYPES_STRING, 
 									MoRPConstants.UUID_PRIMITIVE_TYPES_STRING)
 									.addSuperModel(primitiveType);
