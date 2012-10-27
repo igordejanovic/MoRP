@@ -11,7 +11,7 @@ import net.sleworks.morp.repository.IRepositoryObject;
  * This interface defines all MoRP objects. MoRP objects are interconnected using meta 
  * links/relations and they should have a readable String representation.
  */
-public interface IMoRPObject extends IRepositoryObject {
+public interface IMoRPObject extends IRepositoryObject, Comparable<IMoRPObject> {
 	
 	/**
 	 * @return the MoRP objects which defines this object (its meta-object).

@@ -27,8 +27,15 @@ public class MoRPObject extends RepositoryObject implements IMoRPObject {
 
 	@Override
 	public String getRepr() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("MoRP[%s]", getUUID());
+	}
+
+	/* For now ordering is done comparing UUIDs
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	@Override
+	public int compareTo(IMoRPObject o) {
+		return this.getUUID().compareTo(o.getUUID());
 	}
 
 }
