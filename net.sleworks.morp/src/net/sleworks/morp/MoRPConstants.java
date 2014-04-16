@@ -11,6 +11,14 @@ public interface MoRPConstants {
 	
 	// UUIDs
 	static final String UUID_MORP = "2cc517d2-b565-4c27-bd8c-08479b1bc664";
+	
+	static final String UUID_LANGUAGE = "c495da31-1af7-485e-b8f6-eec28cdfe1bc";
+	static final String UUID_LANGUAGE_ABSTRACT_SYNTAX = "302c1c68-f258-4d45-85dc-0b35baaf547b";
+	static final String UUID_LANGUAGE_CONCRETE_SYNTAXES = "6e04e517-9837-4fa0-a529-70d82cfd52b2";
+
+	static final String UUID_LANGUAGEPART = "4de21dbb-33bf-4d63-81fc-b9a94048d72e";
+	static final String UUID_LANGUAGEPART_CONFORMS_TO = "e70bc7f3-ca17-4538-8dcb-9c15217f8e40";
+	static final String UUID_LANGUAGEPART_CONTENTS = "b444c7d3-6520-4365-ab84-964986532573";
 
 	static final String UUID_NAMED_ELEMENT = "bcd43540-abef-46fe-9cf8-0cdba430016e";
 
